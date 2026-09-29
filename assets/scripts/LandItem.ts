@@ -1,4 +1,4 @@
-import { _decorator, Component, Sprite, SpriteFrame, Node } from 'cc';
+import { _decorator, Component, Sprite, SpriteFrame, Node, Prefab } from 'cc';
 import { GameManager } from './GameManager';
 const { ccclass, property } = _decorator;
 

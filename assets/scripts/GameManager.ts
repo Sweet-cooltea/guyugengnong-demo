@@ -62,6 +62,20 @@ export class GameManager extends Component {
         return false;
     }
 
+    // 卖出粟米换古币，pricePerWheat = 每单位粟米价格
+    sellWheat(amount: number, pricePerWheat: number = 5) {
+    const success = this.reduceWheat(amount);       // 扣仓库粟米
+    if (success) {
+        const coin = amount * pricePerWheat;
+        this.addGold(coin);                          // 加货币
+        console.log(`卖出${amount}粟米，获得${coin}古币`);
+        return coin;
+    } else {
+        console.log("粟米不足，无法卖出");
+        return 0;
+    }
+}
+
     addFish(num: number) {
         this.fish += num;
         this.refreshUI();
@@ -125,7 +139,7 @@ export class GameManager extends Component {
     refreshUI() {
         if (this.txtLevel) this.txtLevel.string = `等级：${this.playerLv}`;
         if (this.txtExp) this.txtExp.string = `经验：${this.playerExp}/${this.expNeed}`;
-        if (this.txtCoin) this.txtCoin.string = `货币：${this.gold}`;
+        if (this.txtCoin) this.txtCoin.string = `古币：${this.gold}`;
         if (this.txtWarehouse) this.txtWarehouse.string = `粟米：${this.wheat}`;
         if (this.txtFish) this.txtFish.string = `鱼：${this.fish}`;
         if (this.txtBird) this.txtBird.string = `小鸟：${this.bird}`;
